@@ -11,6 +11,7 @@ class MessageController(val messageService: MessageService) {
 
     @GetMapping("/message/{message}")
     fun sendMessage(@PathVariable message: String): ResponseEntity<Any> {
+        System.err.println("Recebendo a mensagem $message")
         messageService.sendMessage(message)
         return ResponseEntity.ok().build()
     }

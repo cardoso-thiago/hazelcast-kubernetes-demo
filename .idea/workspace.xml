@@ -1,7 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="06031f03-b045-40d8-b411-4e27f6b00031" name="Default Changelist" comment="" />
+    <list default="true" id="06031f03-b045-40d8-b411-4e27f6b00031" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/publisher/kubernetes/publisher_ingress.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_hazelcast_hazelcast_4_0_3.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_hazelcast_hazelcast_kubernetes_2_1.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules/consumer.main.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules/consumer.main.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules/consumer.test.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules/consumer.test.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules/publisher.main.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules/publisher.main.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules/publisher.test.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules/publisher.test.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/consumer/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/consumer/Dockerfile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/consumer/README.adoc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/consumer/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/consumer/build.gradle.kts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/consumer/kubernetes/consumer_deploy.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/consumer/kubernetes/consumer_deploy.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/consumer/kubernetes/rbac.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/consumer/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/consumer/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/publisher/README.adoc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/publisher/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/publisher/build.gradle.kts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/publisher/kubernetes/publisher_deploy.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/publisher/kubernetes/publisher_deploy.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/publisher/kubernetes/rbac.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/publisher/src/main/kotlin/br/com/cardoso/publisher/controller/MessageController.kt" beforeDir="false" afterPath="$PROJECT_DIR$/publisher/src/main/kotlin/br/com/cardoso/publisher/controller/MessageController.kt" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -72,6 +92,9 @@
       </list>
     </option>
   </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
   <component name="ProjectId" id="1jc4zMVJHb8IdxyAsApPeE6p9yG" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="PropertiesComponent">
@@ -81,14 +104,18 @@
     <property name="RequestMappingsPanelWidth1" value="75" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
+    <property name="go.import.settings.migrated" value="true" />
     <property name="last_directory_selection" value="$PROJECT_DIR$/consumer/src/main/kotlin/br/com/cardoso/consumer" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/publisher" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.0" />
     <property name="show.migrate.to.gradle.popup" value="false" />
   </component>
   <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/publisher/kubernetes" />
+    </key>
     <key name="CopyKotlinDeclarationDialog.RECENTS_KEY">
       <recent name="br.com.cardoso.consumer" />
     </key>
@@ -108,7 +135,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Gradle.consumer [bootJar]">
+  <component name="RunManager" selected="Spring Boot.PublisherApplication">
     <configuration name="consumer [bootJar]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
@@ -204,6 +231,13 @@
       <GradleScriptDebugEnabled>true</GradleScriptDebugEnabled>
       <method v="2" />
     </configuration>
+    <configuration name="ConsumerApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <module name="consumer.main" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="br.com.cardoso.consumer.ConsumerApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="PublisherApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
       <module name="publisher.main" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="br.com.cardoso.publisher.PublisherApplication" />
@@ -221,6 +255,16 @@
       </list>
     </recent_temporary>
   </component>
+  <component name="ServiceViewManager">
+    <option name="allServicesViewState">
+      <serviceView>
+        <treeState>
+          <expand />
+          <select />
+        </treeState>
+      </serviceView>
+    </option>
+  </component>
   <component name="SvnConfiguration">
     <configuration />
   </component>
@@ -233,10 +277,41 @@
       <updated>1604090307299</updated>
       <workItem from="1604090309936" duration="1306000" />
       <workItem from="1604091651995" duration="3745000" />
+      <workItem from="1604415488159" duration="126000" />
+      <workItem from="1619976180654" duration="7027000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="COLUMN_ORDER" />
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="kotlin-line">
+          <url>file://$PROJECT_DIR$/consumer/src/main/kotlin/br/com/cardoso/consumer/configuration/HazelcastConfiguration.kt</url>
+          <line>25</line>
+          <option name="timeStamp" value="3" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="kotlin-line">
+          <url>file://$PROJECT_DIR$/publisher/src/main/kotlin/br/com/cardoso/publisher/configuration/HazelcastConfiguration.kt</url>
+          <line>24</line>
+          <option name="timeStamp" value="7" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

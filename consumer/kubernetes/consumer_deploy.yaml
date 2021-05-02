@@ -18,7 +18,8 @@ spec:
           image: consumer:0.0.1
           imagePullPolicy: Never
           ports:
-          - containerPort: 8080
+          - containerPort: 8081
+          - containerPort: 5701
 ---
 apiVersion: v1
 kind: Service
@@ -30,4 +31,4 @@ spec:
     app: hazelcast-consumer
   ports:
   - name: app
-    port: 8080
+    port: 8081

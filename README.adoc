@@ -1,0 +1,61 @@
+= Testando as Aplicações
+
+== Minikube
+
+Esse passo a passo assume que o ambiente docker, minikube e kubectl já esteja instalado.
+
+* Construindo o projeto *consumer*: `gradle clean build -p consumer/`
+* Construindo o projeto *publisher*: `gradle clean build -p publisher/`
+* Iniciando o minukube: `minikube start`
+* Alterando o ambiente para o docker do minkube: `eval $(minikube docker-env)`
+** Para o fish: `minikube -p minikube docker-env | source`
+* Agora, com o contexto alterado, é necessário gerar as imagens:
+** Gerando a imagem do *consumer*: `docker build -t consumer:0.0.1 consumer`
+** Gerando a imagem do *publisher*: `docker build -t publisher:0.0.1 publisher`
+* Adicionando as permissões para o discovery API do k8s para o Hazelcast: `kubectl apply -f kubernetes/rbac.yaml`
+* Fazendo o deploy do consumer: `kubectl apply -f consumer/kubernetes/consumer_deploy.yaml`
+* Fazendo o deploy do publisher: `kubectl apply -f publisher/kubernetes/publisher_deploy.yaml`
+* Para acessar as aplicações externamente, você deve executar o comando: `minikube tunnel`
+* Em outro terminal, você pode executar o comando `kubectl get svc` para pegar o endereço externo do *publisher*.
+* Para realizar o teste, basta executar um *curl* para o endereço externo, no recurso `/message/{message}`, por exemplo: `curl 10.110.60.49:8080/message/TestMessage`
+** Onde `10.110.60.49:8080` corresponde ao IP e a porta retornado no comando de lista dos serviços.
+** E `TestMessage` a mensagem de teste que deverá ser recebida pelo consumer.
+* Para validar o teste, podemos pegar o nome do pod do consumer com o comando `kubectl get pods`
+** Em seguida, basta executar o comando `kubectl logs <nome_do_pod>`, por exemplo: `kubectl logs hazelcast-consumer-589b655d57-8nrjw`
+** A última linha de execução deve conter a mensagem que enviamos para o *publisher*.
+
+== Kind
+
+Esse passo a passo assume que o ambiente docker, kind e kubectl já esteja instalado.
+
+* Você pode criar o cluster do kind com o exemplo do projeto, com o comando: `kind create cluster --config=kind/kind-cluster.yml`
+** A configuração do exemplo habilita o mapeamento de portas adicionais para que possamos fazer requisições locais nas portas 80/443.
+** Para deletar o cluster, o comando é: `kind delete cluster`
+* Construindo o projeto *consumer*: `gradle clean build -p consumer/`
+* Construindo o projeto *publisher*: `gradle clean build -p publisher/`
+* Agora vamos gerar as imagens:
+** Gerando a imagem do *consumer*: `docker build -t consumer:0.0.1 consumer`
+** Gerando a imagem do *consumer*: `docker build -t publisher:0.0.1 publisher`
+* Agora, vamos carregar as imagens no *kind*:
+** Carregando a imagem do *consumer*: `kind load docker-image consumer:0.0.1`
+** Carregando a imagem do *publisher*: `kind load docker-image publisher:0.0.1`
+* Adicionando as permissões para o discovery API do k8s para o Hazelcast: `kubectl apply -f kubernetes/rbac.yaml`
+* Fazendo o deploy do consumer: `kubectl apply -f consumer/kubernetes/consumer_deploy.yaml`
+* Fazendo o deploy do publisher: `kubectl apply -f publisher/kubernetes/publisher_deploy.yaml`
+* Para o `Ingress Controller`, vamos utilizar nesse exemplo o `Ingress NGINX`. Para isso, basta executar o comando: `kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/master/deploy/static/provider/kind/deploy.yaml`
+* Você pode executar o comando abaixo para saber quando o NGINX estiver pronto para processar requisições:
+
+[source, shell]
+----
+kubectl wait --namespace ingress-nginx \
+  --for=condition=ready pod \
+  --selector=app.kubernetes.io/component=controller \
+  --timeout=90s
+----
+
+* Agora vamos aplicar o Ingress do *publisher* com o comando: `kubectl apply -f publisher/kubernetes/publisher_ingress.yaml`
+* Para realizar o teste, basta executar um *curl* para o endereço configurado no Ingress: `curl localhost/message/TestMessage`
+** Onde `TestMessage` é a mensagem de teste que deverá ser recebida pelo consumer.
+* Para validar o teste, podemos pegar o nome do pod do consumer com o comando `kubectl get pods`
+** Em seguida, basta executar o comando `kubectl logs <nome_do_pod>`, por exemplo: `kubectl logs hazelcast-consumer-7d85b76447-5cmnw`
+** A última linha de execução deve conter a mensagem que enviamos para o *publisher*.

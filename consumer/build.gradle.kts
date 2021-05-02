@@ -19,8 +19,8 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter")
     implementation("org.jetbrains.kotlin:kotlin-reflect")
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
-    implementation ("com.hazelcast:hazelcast:4.0.3")
-    implementation ("com.hazelcast:hazelcast-kubernetes:2.1")
+    implementation ("com.hazelcast:hazelcast:4.2")
+    implementation ("com.hazelcast:hazelcast-kubernetes:2.2.2")
 }
 
 tasks.withType<Test> {
