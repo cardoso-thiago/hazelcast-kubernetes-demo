@@ -1,8 +1,8 @@
 = Testando as Aplicações
 
-== Minikube
+== Minikube + Istio
 
-Esse passo a passo assume que o ambiente docker, minikube e kubectl já esteja instalado.
+Esse passo a passo assume que o docker, minikube, kubectl e istio já estejam instalados.
 
 * Construindo o projeto *consumer*: `gradle clean build -p consumer/`
 * Construindo o projeto *publisher*: `gradle clean build -p publisher/`
@@ -13,6 +13,7 @@ Esse passo a passo assume que o ambiente docker, minikube e kubectl já esteja i
 ** Gerando a imagem do *consumer*: `docker build -t consumer:0.0.1 consumer`
 ** Gerando a imagem do *publisher*: `docker build -t publisher:0.0.1 publisher`
 * Adicionando as permissões para o discovery API do k8s para o Hazelcast: `kubectl apply -f kubernetes/rbac.yaml`
+* Adicionando label para instruir o Istio a automaticamente injetar o sidecar Envoy para as aplicações: `kubectl label namespace default istio-injection=enabled`
 * Fazendo o deploy do consumer: `kubectl apply -f consumer/kubernetes/consumer_deploy.yaml`
 * Fazendo o deploy do publisher: `kubectl apply -f publisher/kubernetes/publisher_deploy.yaml`
 * Para acessar as aplicações externamente, você deve executar o comando: `minikube tunnel`
@@ -23,6 +24,13 @@ Esse passo a passo assume que o ambiente docker, minikube e kubectl já esteja i
 * Para validar o teste, podemos pegar o nome do pod do consumer com o comando `kubectl get pods`
 ** Em seguida, basta executar o comando `kubectl logs <nome_do_pod>`, por exemplo: `kubectl logs hazelcast-consumer-589b655d57-8nrjw`
 ** A última linha de execução deve conter a mensagem que enviamos para o *publisher*.
+
+=== Visualizando Métricas do Istio com o Kiali
+
+* Primeiramente, execute o seguinte comando para o deploy do Kiali, com os addons do Grafana, Jaeger e Prometheus: `kubectl apply -f kubernetes/addons/`
+* Para verificar o status do deploy: `kubectl rollout status deployment/kiali -n istio-system`
+* Para acessar o Kiali, execute o comando: `istioctl dashboard kiali`
+* Para verificar os acessos aos demais serviços Prometheus, Grafana e Jaeger (Tracing), execute o comando `kubectl -n istio-system get svc` para obter o IP e a porta de execução.
 
 == Kind
 
